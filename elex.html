@@ -1,0 +1,28 @@
+<!DOCTYPE>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>ELEX</title>
+  <style></style>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+
+<body>
+    <p>Enter Your Address:
+      <input id="address" placeholder="4 Main St Austin TX"></p>
+    <button id="submit">Submit</button>
+    <div id="results"></div>
+
+<script>
+$("#submit").click(function() {
+      $.getJSON("https://www.googleapis.com/civicinfo/v2/representatives?key=[INSERT YOUR GOOGLE API KEY]&address="+$("#address").val(),
+      function success(data){
+        console.log(data.offices);
+        console.log(data.officials);
+  });
+})
+</script>
+
+</body>
+</html>
