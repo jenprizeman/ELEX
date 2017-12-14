@@ -1,4 +1,4 @@
-<!DOCTYPE>
+<!-- <!DOCTYPE> -->
 <html lang="en">
 
 <head>
@@ -13,16 +13,27 @@
       <input id="address" placeholder="4 Main St Austin TX"></p>
     <button id="submit">Submit</button>
     <div id="results"></div>
-
 <script>
 $("#submit").click(function() {
-      $.getJSON("https://www.googleapis.com/civicinfo/v2/representatives?key=[INSERT YOUR GOOGLE API KEY]&address="+$("#address").val(),
-      function success(data){
-        console.log(data.offices);
-        console.log(data.officials);
-  });
-})
+      $.getJSON("https://www.googleapis.com/civicinfo/v2/representatives?key=[INSERT GOOGLE API KEY]&address="+$("#address").val(), function (data){ 
+        //test address is 408 halsey rd annapolis md
+        $.each(data, function() {
+        x = data.officials[0];
+        for (i = 0; i < data.officials.length; i++) {
+        x += data.officials[0];
+          //console.log(x.name);  //returns list of 18 undefined objects  
+          console.log(x);  //returns massive list of nondistinct objects   
+          //console.log(data.officials[0]); //returns Donald J Trump Republican info (still messy) *18 times!*
+        }    
+          //console.log(data.officials[0]); //returns Donald J Trump Republican info (still messy) ONCE
+         
+          //console.log(data.officials);  //returns entire json array of 18
+          //console.log(data.offices);    //returns entire json array of 16 
+         
+        } ) 
+      } ) 
+}); 
+                         
 </script>
-
 </body>
 </html>
