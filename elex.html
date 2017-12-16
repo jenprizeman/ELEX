@@ -26,11 +26,9 @@ $("#submit").click(function() {
       $.getJSON("https://www.googleapis.com/civicinfo/v2/representatives?key=[INSERT GOOGLE API KEY HERE]&address="+$("#address").val(), function (data){ 
         $.each(data, function() {  
      // console.log(data.officials);//(**For testing: returns entire array of 18)
-          //**ERROR: Multiple JSON root elements (4 extra duplicates)
         for (i = 0; i < data.officials.length; i++) {
           x = data.officials[i].name;  
           y = data.offices[i].name; 
-         // x += data.officials[i].name; //x = data.officials[0].name;
           console.log(x,y); 
           $("#results").append(JSON.stringify(x));  
           $("#results").append(JSON.stringify(y)); 
