@@ -4,34 +4,39 @@
 <head>
   <meta charset="utf-8">
   <title>ELEX</title>
-  <style></style>
+  <style>
+    #results { background-color: #C3C3C3; }
+    body { 
+      font-family: sans-serif;
+      text-align: center;
+    }
+  </style>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
 <body>
-    <p>Enter Your Address:
-      <input id="address" placeholder="4 Main St Austin TX"></p>
+  <h1>Find Your Elected Officials</h1>
+    <h3><p>Enter Address:<!--**Test address is 408 halsey rd annapolis md--> 
+      <input id="address" placeholder="4 Main St Austin TX"></p></h3>
     <button id="submit">Submit</button>
+  <br></br>
     <div id="results"></div>
 <script>
 $("#submit").click(function() {
-      $.getJSON("https://www.googleapis.com/civicinfo/v2/representatives?key=[INSERT GOOGLE API KEY]&address="+$("#address").val(), function (data){ 
-        //test address is 408 halsey rd annapolis md
-        $.each(data, function() {
-        x = data.officials[0];
+      $.getJSON("https://www.googleapis.com/civicinfo/v2/representatives?key=[INSERT GOOGLE API KEY HERE]&address="+$("#address").val(), function (data){ 
+        $.each(data, function() {  
+     // console.log(data.officials);//(**For testing: returns entire array of 18)
+          //**ERROR: Multiple JSON root elements (4 extra duplicates)
         for (i = 0; i < data.officials.length; i++) {
-        x += data.officials[0];
-          //console.log(x.name);  //returns list of 18 undefined objects  
-          console.log(x);  //returns massive list of nondistinct objects   
-          //console.log(data.officials[0]); //returns Donald J Trump Republican info (still messy) *18 times!*
-        }    
-          //console.log(data.officials[0]); //returns Donald J Trump Republican info (still messy) ONCE
-         
-          //console.log(data.officials);  //returns entire json array of 18
-          //console.log(data.offices);    //returns entire json array of 16 
-         
-        } ) 
-      } ) 
+          x = data.officials[i].name;  
+          y = data.offices[i].name; 
+         // x += data.officials[i].name; //x = data.officials[0].name;
+          console.log(x,y); 
+          $("#results").append(JSON.stringify(x));  
+          $("#results").append(JSON.stringify(y)); 
+          }     
+        }) 
+      }) 
 }); 
                          
 </script>
