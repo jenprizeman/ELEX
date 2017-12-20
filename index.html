@@ -22,18 +22,18 @@
     <div id="results"></div>
 <script>
 $("#submit").click(function() {
-      $.getJSON("https://www.googleapis.com/civicinfo/v2/representatives?key=[INSERT GOOGLE KEY ID]&address="+$("#address").val(), function (data){ 
+      $.getJSON("https://www.googleapis.com/civicinfo/v2/representatives?key=[INSERT GOOGLE KEY]&address="+$("#address").val(), function (data){ 
         //Add user input/form validation 
         $.each(data, function() {  
+     
         for (i = 0; i < data.officials.length; i++) {
           x = data.officials[i].name;  
           y = data.offices[i].name; 
-          //console.log(x,y); (for testing)
+          //console.log(x,y); //**for testing 
           $("#results").css("background-color","#C3C3C3")
- 
+          
           $("#results").append(JSON.stringify(x).replace(/\"/g, "")); 
           $("#results").append(": "); 
-          
           $("#results").append(JSON.stringify(y).replace(/\"/g, "")); 
           $("#results").append("<br/><br/>"); 
           }   
