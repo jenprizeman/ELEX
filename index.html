@@ -1,11 +1,10 @@
-<!-- <!DOCTYPE> -->
+<!DOCTYPE>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <title>ELEX</title>
   <style>
-    #results { background-color: #C3C3C3; }
     body { 
       font-family: sans-serif;
       text-align: center;
@@ -23,16 +22,21 @@
     <div id="results"></div>
 <script>
 $("#submit").click(function() {
-      $.getJSON("https://www.googleapis.com/civicinfo/v2/representatives?key=[INSERT GOOGLE API KEY HERE]&address="+$("#address").val(), function (data){ 
+      $.getJSON("https://www.googleapis.com/civicinfo/v2/representatives?key=[INSERT GOOGLE KEY ID]&address="+$("#address").val(), function (data){ 
+        //Add user input/form validation 
         $.each(data, function() {  
-     // console.log(data.officials);//(**For testing: returns entire array of 18)
         for (i = 0; i < data.officials.length; i++) {
           x = data.officials[i].name;  
           y = data.offices[i].name; 
-          console.log(x,y); 
-          $("#results").append(JSON.stringify(x));  
-          $("#results").append(JSON.stringify(y)); 
-          }     
+          //console.log(x,y); (for testing)
+          $("#results").css("background-color","#C3C3C3")
+ 
+          $("#results").append(JSON.stringify(x).replace(/\"/g, "")); 
+          $("#results").append(": "); 
+          
+          $("#results").append(JSON.stringify(y).replace(/\"/g, "")); 
+          $("#results").append("<br/><br/>"); 
+          }   
         }) 
       }) 
 }); 
